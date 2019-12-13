@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Actividades - mapa y tabla</title>
+
+<script src="libs/jquery-1.12.4/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/cerulean.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="libs/navigation-1.1/tabsets.js"></script>
+<link href="libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.3/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.0.3/leaflet-providers-plugin.js"></script>
+<link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.css" rel="stylesheet" />
+<link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.Default.css" rel="stylesheet" />
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.js"></script>
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.freezable.js"></script>
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.layersupport.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.10/datatables.js"></script>
+<link href="libs/dt-core-1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.19/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.19/js/jquery.dataTables.min.js"></script>
+<link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet" />
+<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script>
+<link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet" />
+<script src="libs/selectize-0.12.0/selectize.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128948015-3"></script> -->
+<!-- <script> -->
+<!--   window.dataLayer = window.dataLayer || []; -->
+<!--   function gtag(){dataLayer.push(arguments);} -->
+<!--   gtag('js', new Date()); -->
+<!--   gtag('config', 'UA-128948015-3'); -->
+<!-- </script> -->
+<p><img src="https://raw.githubusercontent.com/11defebrero/web11F2020/master/img/banner11F.png" /></p>
+<style type="text/css">
+
+h1 {
+  color: #00BCB4;
+}
+h2 {
+  color: #00BCB4;
+}
+h3 {
+  color: #00BCB4;
+}
+h4 {
+  color: #00BCB4;
+}
+h5 {
+  color: #00BCB4;
+}
+li {
+  color: #00BCB4;
+}
+</style>
+<div id="actividades-generales" class="section level1 tabset tabset-fade tabset-pills">
+<h1>Actividades GENERALES</h1>
+<div id="presenciales" class="section level2">
+<h2>PRESENCIALES</h2>
+<p>Aquí puedes buscar, a modo de agenda, las actividades generales <strong>presenciales</strong> organizadas para celebrar el <a href="https://11defebrero.org/">Día de la Mujer y la Niña en la Ciencia</a>.</p>
+<p>En la tabla puedes filtrar por localización, fecha, tipo de público, etc.</p>
+<p>Pincha en la actividad para más detalles.</p>
+<p>Si detectas algún error en estos datos, por favor, escribe a: <a href="mailto:correccionesweb11F@gmail.com" class="email">correccionesweb11F@gmail.com</a></p>
+<hr />
+<div id="buscar-en-mapa" class="section level3">
+<h3><a href="#mapa-de-actividades-presenciales">Buscar en mapa</a></h3>
+</div>
+<div id="buscar-en-tabla" class="section level3">
+<h3><a href="#tabla-de-actividades-presenciales">Buscar en tabla</a></h3>
+</div>
+<div id="ver-todas" class="section level3">
+<h3><a href="https://11defebrero.org/category/actividades2020/" target="_blank">Ver todas</a></h3>
+<hr />
+</div>
+<div id="mapa-de-actividades-presenciales" class="section level3">
+<h3>Mapa de actividades presenciales</h3>
+<p>En este mapa interactivo puedes consultar las actividades presenciales programadas. La localización de los centros en el mapa es aproximada, corresponde al código postal en el que se ubican.</p>
+<p>Si pinchas en cualquier icono podrás acceder a más información sobre cada actividad.</p>
+<p>Si tienes problema al visualizar el mapa, por favor, prueba con otro navegador.</p>
+<div id="htmlwidget-73ee0af7aed51481e775" style="width:100%;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-73ee0af7aed51481e775">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addMarkers","args":[[37.35679171,41.66789868,41.68491566,41.66789868,41.65234557,41.6515153,41.65234557,27.91390452,27.99636975,42.92370576,42.54717044,41.27557526,40.57188646,40.57188646,40.57188646,39.21366858,39.13973774,39.47810594,39.14505157],[-5.966124217,-0.9068037087,-0.8649996757,-0.9068037087,-0.8904227686,-0.8772339476,-0.8904227686,-15.5050405,-15.41808373,-3.37095022,-6.581864148,1.950613426,-3.672817469,-3.672817469,-3.672817469,-0.4292429116,-0.4070333621,-0.3641998696,2.943925476],{"iconUrl":{"data":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEEAAABoCAYAAACuVJ27AAAEmUlEQVR4nO1cwZXiMAylBEqgBErIBewjJUwJlJAOKMEvkXKmBEqgBEpICbsHEpaBhFiybMsz+9/zYQ5DYvlb+pLlrFYJsOu67R7gYFo8GsSTRXQW8GIArwawt4i3+9/d2SI620Bt2/bLAlQp3i8aLEBlG6gN4NUC/uEOA9gbxFMxBrEA1bDSt5CJfzZKd7Zt+5V7rm+wzm0M4skA9rEmP8GQq3Vuk3vuq8q5derJvw1El80Yw37PN/lXZiCekk2+cm49ePfsE8+yRXZdt7WAl9yTXTBEv+u6bRQDWIBKE/0XjdHiUdQApsVjSQZ4jAZqEQPsum5bpAHGEaoprHObog3wGEy1WTm3tsqdoO8wgD0rahjozpFe6GqgOxvEk22gNi0ebQO1baAeE6soxkC80QzQ4lF0FQAvpsUjJXTtAQ7SesRAd/Z6eOXcWsIPDCmyiKSVXBSvhbAN1AIPu0gLFimlagCvnw0QGA0MYC8uUl7fEaAKNcQe4DD/gABLG8D+448LYtd126CaxZyTDLFwVL0+g8F38atWUyLqXsLSzYBXBDnxKTZw6RXbBywhyEc8R64hReZY0+Wb/j/cK9OBC8gJi2wpGgkcJn8TT6ytIJWmCmEPcOCwoXJuzdoKBrCvnFvnnvgrWNGibb9Y+ylpUZMAlm9ooGbp8lwhcQlD+k/3C1SVqHUrjGD4twu5buCdjmYCNdIZwH5liUUMrf5gBDVK3I1ApE9uhbgEjoJcUbW3Vqc4guMc/xthMAJRYOhulrDObchGIDtG5T6BrIARb/Q6grKc4RVUx2gAr/TEQ0n6PAeqdDaIJ7IjMYB97ol+AlX8PRw9WWoqqiO8gj0Xcv6g1Dmy/MHjn+kp6CXjXGdBzhueUwCOwEhdYl8Cp/L8JvwsVS8sHWclBjXUTzp4TlVGi4TmHB9OZsO8qkz+Ast9G9B7KWYXkHkAk9VJck7OPi4e+xAjU7WJ27fwsTDE2RJePxwBYW2FC5lwYCNE9K0xNpWzF8snqrHPJZ8eEktDcJ3gt+GbBUtc2jCIJ6kcQ+pKAen8lOsg54zBZYZ1bjO09gUvigWklQFCHOSnVRjvMk2tRuXc+l4ak7k7NT2IpcEQ50NcnVui1mG6047BhpyDLfFjtfYmH4g3tryX6BlUMUKLwzHvOKYYIkmeZLgskgWls0G0uUyyyzytEQSz23LDpfC5aTLxpJEFI8pjQ6TT81LYELXSVQ4bIvdQaGdDknqnfjYk6qTRyoakVW+9bEjcT6XtQxJZzj70sSFTV50WNmTtt9bDhsy9lbnZoKLrPj8blHTYCl0yL5MFI4Yb7bdfy4IRqWuRqljwjFRsyHFB3Rup2KD9ClJ0Nmi7njwJ7nVd76H8qsEDcY7VMexMMTVCW35mt4LSxvJZiJ9ol8SCEeJyWuPHaX0glVypFUY+kGODMnlMRfBhrvKLZ95gf7mnBGHkC7aAKkUY+YIsoEoMiUug3mEuThj5ghAyVd62E4F/yCw8JC5hqR5ZtDCiYC5kqq4YSWM2ZP60kLiEtyzzJ4bEJbyFzFKzxFCMzR6/xhlOYfzOam5n+Bc73ZE9yKIdJAAAAABJRU5ErkJggg==","index":0},"iconWidth":20,"iconHeight":30,"iconAnchorX":10,"iconAnchorY":15},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["<a href='http://11defebrero.org/2019/12/08/las-mujeres-del-instituto-de-la-grasa-tambien-hacemos-ciencia/' target='_blank'>Las mujeres del Instituto de la Grasa también hacemos Ciencia.<\/a><br/>Concurso<br/>Instituto de la Grasa -CSIC-<br/>14  febrero 2020","<a href='http://11defebrero.org/2019/12/08/taller-babelbox-la-vida-de-mujeres-cientificas-cuyos-inventos-han-llegado-hasta-nuestros-dias/' target='_blank'>Taller Babelbox. La vida de mujeres científicas cuyos inventos han llegado hasta nuestros días.<\/a><br/>Taller<br/>11 de febrero - Fundación Dolores Sopeña<br/>13  febrero 2020","<a href='http://11defebrero.org/2019/12/08/investigando-en-salud-en-tu-barrio-en-tu-pueblo/' target='_blank'>Investigando en salud en tu barrio, en tu pueblo<\/a><br/>Charla<br/>Grupo de Investigación en Atención Primaria. Aragón","<a href='http://11defebrero.org/2019/12/08/unguentos-literarios-para-curar-casi-todo/' target='_blank'>Ungüentos literarios para curar (casi) todo<\/a><br/>Taller<br/>El Laboratorio de Sueños","<a href='http://11defebrero.org/2019/12/08/actividades-ludico-educativas-por-la-igualdad/' target='_blank'>Actividades lúdico-educativas por la Igualdad<\/a><br/>Taller, Charla, Escaparates, Cuentacuentos<br/>medicusmundi<br/>14  febrero 2020","<a href='http://11defebrero.org/2019/12/08/un-dos-tres-cuenta-cientificas-que-11-de-febrero-es/' target='_blank'>Un, dos, tres... cuenta científicas, que 11 de febrero es.<\/a><br/>Taller, Jornadas, Charla, Exposición<br/>Cuentacientíficas<br/>7, 11, 12, 14  febrero 2020","<a href='http://11defebrero.org/2019/12/08/cientificas-antes-que-yo/' target='_blank'>Científicas antes que yo<\/a><br/>Exposición, Concurso<br/>Museo de Ciencias Naturales de la Universidad de Zaragoza, Vicerrectorado de Cultura y Proyección Social","<a href='http://11defebrero.org/2019/12/08/mujeres-cientificas-canarias/' target='_blank'>El proyecto mujeres científicas canarias es un proyecto educativo para visibilizar  investigadoras<\/a><br/>charla más exposición con productos realizados por el alumnado<br/>Consejería de Educación del Gobierno de Canarias y Fundación Canaria Observatorio de Temisas e INVEPA","<a href='http://11defebrero.org/2019/12/08/ciclo-mujer-y-ciencia-2020/' target='_blank'>Ciclo Mujer y Ciencia 2020<\/a><br/>Jornadas<br/>Fundación Canaria Observatorio de Temisas","<a href='http://11defebrero.org/2019/12/08/taller-steam-mujeres-cientificas/' target='_blank'>TALLER STEAM MUJERES CIENTÍFICAS<\/a><br/>Taller<br/>Escuela de Pequeñ@s Científic@s Espiciencia<br/>15  febrero 2020","<a href='http://11defebrero.org/2019/12/08/soy-cientifica-y-tu/' target='_blank'>Soy científica, ¿y tú?<\/a><br/>Charla<br/>Universidad de León<br/>11  febrero 2020","<a href='http://11defebrero.org/2019/12/08/visita-a-icfo-para-familias/' target='_blank'>Visita a ICFO para familias<\/a><br/>visita a centro investigación<br/>ICFO<br/>7  febrero 2020","<a href='http://11defebrero.org/2019/12/08/de-la-mano-de-grandes-mujeres/' target='_blank'>De la mano de grandes mujeres<\/a><br/>Charla<br/>Dos investigadoras del CSIC<br/>12  febrero 2020","<a href='http://11defebrero.org/2019/12/08/grafeno-del-lapiz-al-sensor-ultrasensible/' target='_blank'>Grafeno: del lápiz al sensor ultrasensible<\/a><br/>Taller<br/>ICMM-CSIC<br/>11  febrero 2020","<a href='http://11defebrero.org/2019/12/08/proyeccion-del-documental-el-enigma-agustina/' target='_blank'>Proyección del documental El Enigma Agustina<\/a><br/>Proyección documental<br/>Centro Nacional de Biotecnología (CNB-CSIC)<br/>11  febrero 2020","<a href='http://11defebrero.org/2019/12/08/curie-un-cuento-activo-4/' target='_blank'>Curie, un cuento activo<\/a><br/>Actuación<br/>Regidoria d' Igualtat<br/>7  febrero 2020","<a href='http://11defebrero.org/2019/12/08/curie-un-cuento-activo-3/' target='_blank'>Curie, un cuento activo<\/a><br/>Actuación<br/>Regidoria d'Igualtat<br/>12  febrero 2020","<a href='http://11defebrero.org/2019/12/08/girls4stem/' target='_blank'>Girls4STEM<\/a><br/>Jornadas, Charla, Proyecto dirigido al fomento de las vocaciones STEM (Science, Technology, Engineering, Mathematics), muy especialmente entre las chicas, a través de la organización de actividades de divulgación.<br/>Universitat de València: ETSE-UV. Vicerrectorado Igualdad, Diversidad y Sostenibilidad. Unitat d'Igualtat","<a href='http://11defebrero.org/2019/12/08/citas-rapidas-con-cientificas-3/' target='_blank'>Citas rápidas con científicas<\/a><br/>Cita rápida<br/>Plataforma 11F Balears<br/>8  febrero 2020"],null,{"showCoverageOnHover":true,"zoomToBoundsOnClick":true,"spiderfyOnMaxZoom":true,"removeOutsideVisibleBounds":true,"spiderLegPolylineOptions":{"weight":1.5,"color":"#222","opacity":0.5},"freezeAtZoom":false},null,["Las mujeres del Instituto de la Grasa también hacemos Ciencia.","Taller Babelbox. La vida de mujeres científicas cuyos inventos han llegado hasta nuestros días.","Investigando en salud en tu barrio, en tu pueblo","Ungüentos literarios para curar (casi) todo","Actividades lúdico-educativas por la Igualdad","Un, dos, tres... cuenta científicas, que 11 de febrero es.","Científicas antes que yo","El proyecto mujeres científicas canarias es un proyecto educativo para visibilizar  investigadoras","Ciclo Mujer y Ciencia 2020","TALLER STEAM MUJERES CIENTÍFICAS","Soy científica, ¿y tú?","Visita a ICFO para familias","De la mano de grandes mujeres","Grafeno: del lápiz al sensor ultrasensible","Proyección del documental El Enigma Agustina","Curie, un cuento activo","Curie, un cuento activo","Girls4STEM","Citas rápidas con científicas"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[27.91390452,42.92370576],"lng":[-15.5050405,2.943925476]}},"evals":[],"jsHooks":[]}</script>
+<p><br/></p>
+</div>
+<div id="tabla-de-actividades-presenciales" class="section level3">
+<h3>Tabla de actividades presenciales</h3>
+<p>En esta tabla podéis consultar las actividades presenciales programadas por provincia, municipio, tipo de actividad, etc. Podéis filtrar por varios criterios desde la fila superior (aparecerá una <strong>X</strong> en las columnas que tengan el filtro activado).</p>
+<p>Si pincháis en el nombre del centro podréis acceder a más información útil.</p>
+<p><br/></p>
+<div id="htmlwidget-ef6736374eeebd8a8693" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ef6736374eeebd8a8693">{"x":{"filter":"top","filterHTML":"<tr>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","data":[["<a href='http://11defebrero.org/2019/12/08/las-mujeres-del-instituto-de-la-grasa-tambien-hacemos-ciencia/' target='_blank'>Las mujeres del Instituto de la Grasa también hacemos Ciencia.<\/a>","<a href='http://11defebrero.org/2019/12/08/taller-babelbox-la-vida-de-mujeres-cientificas-cuyos-inventos-han-llegado-hasta-nuestros-dias/' target='_blank'>Taller Babelbox. La vida de mujeres científicas cuyos inventos han llegado hasta nuestros días.<\/a>","<a href='http://11defebrero.org/2019/12/08/investigando-en-salud-en-tu-barrio-en-tu-pueblo/' target='_blank'>Investigando en salud en tu barrio, en tu pueblo<\/a>","<a href='http://11defebrero.org/2019/12/08/unguentos-literarios-para-curar-casi-todo/' target='_blank'>Ungüentos literarios para curar (casi) todo<\/a>","<a href='http://11defebrero.org/2019/12/08/actividades-ludico-educativas-por-la-igualdad/' target='_blank'>Actividades lúdico-educativas por la Igualdad<\/a>","<a href='http://11defebrero.org/2019/12/08/un-dos-tres-cuenta-cientificas-que-11-de-febrero-es/' target='_blank'>Un, dos, tres... cuenta científicas, que 11 de febrero es.<\/a>","<a href='http://11defebrero.org/2019/12/08/cientificas-antes-que-yo/' target='_blank'>Científicas antes que yo<\/a>","<a href='http://11defebrero.org/2019/12/08/mujeres-cientificas-canarias/' target='_blank'>El proyecto mujeres científicas canarias es un proyecto educativo para visibilizar  investigadoras<\/a>","<a href='http://11defebrero.org/2019/12/08/ciclo-mujer-y-ciencia-2020/' target='_blank'>Ciclo Mujer y Ciencia 2020<\/a>","<a href='http://11defebrero.org/2019/12/08/taller-steam-mujeres-cientificas/' target='_blank'>TALLER STEAM MUJERES CIENTÍFICAS<\/a>","<a href='http://11defebrero.org/2019/12/08/soy-cientifica-y-tu/' target='_blank'>Soy científica, ¿y tú?<\/a>","<a href='http://11defebrero.org/2019/12/08/visita-a-icfo-para-familias/' target='_blank'>Visita a ICFO para familias<\/a>","<a href='http://11defebrero.org/2019/12/08/de-la-mano-de-grandes-mujeres/' target='_blank'>De la mano de grandes mujeres<\/a>","<a href='http://11defebrero.org/2019/12/08/grafeno-del-lapiz-al-sensor-ultrasensible/' target='_blank'>Grafeno: del lápiz al sensor ultrasensible<\/a>","<a href='http://11defebrero.org/2019/12/08/proyeccion-del-documental-el-enigma-agustina/' target='_blank'>Proyección del documental El Enigma Agustina<\/a>","<a href='http://11defebrero.org/2019/12/08/curie-un-cuento-activo-4/' target='_blank'>Curie, un cuento activo<\/a>","<a href='http://11defebrero.org/2019/12/08/curie-un-cuento-activo-3/' target='_blank'>Curie, un cuento activo<\/a>","<a href='http://11defebrero.org/2019/12/08/girls4stem/' target='_blank'>Girls4STEM<\/a>","<a href='http://11defebrero.org/2019/12/08/citas-rapidas-con-cientificas-3/' target='_blank'>Citas rápidas con científicas<\/a>"],["14  febrero 2020","13  febrero 2020","-","-","14  febrero 2020","7, 11, 12, 14  febrero 2020","-","-","-","15  febrero 2020","11  febrero 2020","7  febrero 2020","12  febrero 2020","11  febrero 2020","11  febrero 2020","7  febrero 2020","12  febrero 2020","-","8  febrero 2020"],["Sevilla","Zaragoza","Zaragoza","Zaragoza","Zaragoza","Zaragoza","Zaragoza","Las Palmas","Las Palmas","Burgos","León","Barcelona","Madrid","Madrid","Madrid","Valencia/València","Valencia/València","Valencia/València","Illes Balears"],["41013, SEVILLA","50003, ZARAGOZA","50015, ZARAGOZA","50003, ZARAGOZA","50004, ZARAGOZA","50001, ZARAGOZA","50004, ZARAGOZA","35270, AGÜIMES","35200, VARIOS","09500, MEDINA DE POMAR","24401, PONFERRADA","08860, CASTELLDEFELS","28049, MADRID","28049, MADRID","28049, MADRID","46680, ALGEMESÍ","46600, ALZIRA","46010, VALÈNCIA","07001, PALMA"],["Concurso","Taller","Charla","Taller","Taller, Charla, Escaparates, Cuentacuentos","Taller, Jornadas, Charla, Exposición","Exposición, Concurso","charla más exposición con productos realizados por el alumnado","Jornadas","Taller","Charla","visita a centro investigación","Charla","Taller","Proyección documental","Actuación","Actuación","Jornadas, Charla, Proyecto dirigido al fomento de las vocaciones STEM (Science, Technology, Engineering, Mathematics), muy especialmente entre las chicas, a través de la organización de actividades de divulgación.","Cita rápida"],["Público general, Para centros educativos. ESO, Para centros educativos. Bachillerato, Para centros educativos. FP","Otros","Público general, Para centros educativos. Primaria, Para centros educativos. ESO, Para centros educativos. Bachillerato, Para centros educativos. FP","Público familiar","Público general, Público familiar, Público infantil","Público general, Público familiar, Público infantil","Público general, Para centros educativos. Primaria, Para centros educativos. ESO, Para centros educativos. Bachillerato, Para centros educativos. FP","Para centros educativos. Primaria, Para centros educativos. ESO, Para centros educativos. Bachillerato","Público general","Público infantil","Para centros educativos. Infantil","Público familiar","Público general","Para centros educativos. ESO, Para centros educativos. Bachillerato","Público general","Para centros educativos. ESO","Para centros educativos. Primaria","Público general, Público familiar, Público infantil, Para centros educativos. Primaria, Para centros educativos. ESO, Para centros educativos. Bachillerato, Para centros educativos. FP, Universidad, Otros","Público general, Público familiar"],["Instituto de la Grasa -CSIC-","11 de febrero - Fundación Dolores Sopeña","Grupo de Investigación en Atención Primaria. Aragón","El Laboratorio de Sueños","medicusmundi","Cuentacientíficas","Museo de Ciencias Naturales de la Universidad de Zaragoza, Vicerrectorado de Cultura y Proyección Social","Consejería de Educación del Gobierno de Canarias y Fundación Canaria Observatorio de Temisas e INVEPA","Fundación Canaria Observatorio de Temisas","Escuela de Pequeñ@s Científic@s Espiciencia","Universidad de León","ICFO","Dos investigadoras del CSIC","ICMM-CSIC","Centro Nacional de Biotecnología (CNB-CSIC)","Regidoria d' Igualtat","Regidoria d'Igualtat","Universitat de València: ETSE-UV. Vicerrectorado Igualdad, Diversidad y Sostenibilidad. Unitat d'Igualtat","Plataforma 11F Balears"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Título<\/th>\n      <th>Fecha<\/th>\n      <th>Provincia<\/th>\n      <th>Localidad<\/th>\n      <th>Tipo actividad<\/th>\n      <th>Dirigido a<\/th>\n      <th>Organiza<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true}},"evals":[],"jsHooks":[]}</script>
+<p>Última actualización: 2019-12-13</p>
+</div>
+</div>
+<div id="no-presenciales" class="section level2">
+<h2>NO PRESENCIALES</h2>
+<p>Aquí puedes buscar, a modo de agenda, las actividades generales <strong>no presenciales</strong> organizadas para celebrar el <a href="https://11defebrero.org/">Día de la Mujer y la Niña en la Ciencia</a>.</p>
+<p>En la tabla puedes filtrar por localización, fecha, tipo de público, etc.</p>
+<p>Pincha en la actividad para más detalles.</p>
+<p>Si detectas algún error en estos datos, por favor, escribe a: <a href="mailto:correccionesweb11F@gmail.com" class="email">correccionesweb11F@gmail.com</a></p>
+<hr />
+<div id="ver-todas-1" class="section level3">
+<h3><a href="https://11defebrero.org/category/actividades2020/" target="_blank">Ver todas</a></h3>
+<hr />
+</div>
+<div id="tabla-de-actividades-no-presenciales" class="section level3">
+<h3>Tabla de actividades no presenciales</h3>
+<p>En esta tabla podéis consultar las actividades no presenciales programadas por tipo de actividad, público, etc. Podéis filtrar por varios criterios desde la fila superior (aparecerá una <strong>X</strong> en las columnas que tengan el filtro activado).</p>
+<p>Si pincháis en el nombre del centro podréis acceder a más información útil.</p>
+<p><br/></p>
+<div id="htmlwidget-5cf18d8f51d380e7cadb" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5cf18d8f51d380e7cadb">{"x":{"filter":"top","filterHTML":"<tr>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","data":[["<a href='http://11defebrero.org/2019/12/08/visibiliza-cientificas-decorando-tu-centro-educativo-con-estos-posters/' target='_blank'>Visibiliza científicas decorando tu centro educativo con estos pósters<\/a>","<a href='http://11defebrero.org/2019/12/08/programa-de-radio-naciendo-ciencia-mujeres-en-la-ciencia-de-antano/' target='_blank'>Programa de radio NACIENDO CIENCIA: MUJERES EN LA CIENCIA DE ANTAÑO<\/a>","<a href='http://11defebrero.org/2019/12/08/la-mujer-en-matematicas-contribuciones-de-alumnas-a-las-matematicas-juego-didactico/' target='_blank'>La mujer en matemáticas. Contribuciones de alumnas a las matemáticas. Juego didáctico.<\/a>","<a href='http://11defebrero.org/2019/12/08/chatea-con-una-astronoma-2/' target='_blank'>Chatea con una Astrónoma<\/a>"],["-","11  febrero 2020","-","-"],["Campaña","Programa de radio","Artículos en un blog, Programa de radio, Vídeo","Vídeo"],["Para centros educativos. Infantil, Para centros educativos. Primaria, Para centros educativos. ESO, Para centros educativos. Bachillerato, Para centros educativos. FP, Universidad, Otros","Público general","Público general, Para centros educativos. ESO, Para centros educativos. Bachillerato","Público general"],["CASIO España","Escuela de Pequeñ@s Científic@s Espiciencia","RED Descartes","Comisión Mujer y Astronomía de la Sociedad Española de Astronomía"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Título<\/th>\n      <th>Fecha<\/th>\n      <th>Tipo actividad<\/th>\n      <th>Dirigido a<\/th>\n      <th>Organiza<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true}},"evals":[],"jsHooks":[]}</script>
+<p>Última actualización: 2019-12-13</p>
+</div>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
